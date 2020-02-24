@@ -2,20 +2,26 @@
 "game" - based off bloons tower defense.
 Balloons move along a path and you have to build towers to shoot them down before they reach the end of the path.
 
-var themap keeps track of which terrain type is at each map location.
+## Data structures
+
+__var themap__
+Keeps track of which terrain type is at each map location.
 It is a 2D array, indexed like themap[x][y]
 and each element is a terrain type, like MAP_GRASS or MAP_PATHS.
 
-var paths stores the path locations in a sequence from start to end.
+__var paths__
+Stores the path locations in a sequence from start to end.
 It is an array of map coordinates, like [x,y].
 
-var towers keeps track of tower placements and types.
+__var towers__
+Keeps track of tower placements and types.
 It is an array. Each element is an object with keys
  - at: [x,y] referring to the top-left corner of the tower.
  - size: [w,h] in grid squares.
  - type: a tower type, like TOWER_BASIC
 
-var tower_info stores details about the different tower types.
+__var tower_info__
+Stores details about the different tower types.
 It is an array indexed by tower type, e.g. tower_info[TOWER_BASIC].
 Each element is an object with these required keys:
 - range: firing range (radius) in grid squares.
@@ -104,11 +110,8 @@ function draw() {
   drawmap()
   // draw existing towers
   for (let tower of towers) {
-    // is this just the same as the preview let's make the tower grey and have no range indicator 
     let xi = tower.at[0]
     let yi = tower.at[1]
-    // similar to drawing preview below
-    //do we check valid_build? no it's already been built so assume is valid.
     let x_px = mapXToCanvas(xi)
     let y_px = mapYToCanvas(yi)
     fill("grey")
@@ -228,6 +231,7 @@ function generatemap() {
   }
   return m
 }
+
 function drawmap() {
   for (let i = 0; i < nx; i++) {
     for (let j = 0; j < ny; j++) {
